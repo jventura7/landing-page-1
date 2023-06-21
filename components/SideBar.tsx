@@ -1,19 +1,38 @@
 import MobileNavBar from '@/components/MobileNavBar';
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 interface SideBarProps {
   setOpenMobileMenu: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function SideBar({ setOpenMobileMenu }: SideBarProps) {
+  const [isDesktop, setIsDesktop] = useState<boolean>(window.innerWidth > 767);
+
+  useEffect(() => {
+    const updateDesktop = () => {
+      setIsDesktop(window.innerWidth > 767);
+    };
+    window.addEventListener('resize', updateDesktop);
+
+    if (isDesktop) {
+      setOpenMobileMenu(false);
+    }
+
+    return () => window.removeEventListener('resize', updateDesktop);
+  });
+
   return (
-    <div className="absolute top-0 left-0 bg-opacity-30 bg-gray-900 w-full h-full z-[1]">
-      <div className="absolute top-0 bottom-0 right-0 bg-white bg-opacity-100 w-3/5 p-5">
-        <div
-          onClick={() => setOpenMobileMenu(false)}
-          className="flex justify-end"
-        >
+    <div
+      onClick={() => setOpenMobileMenu(false)}
+      className="absolute top-0 left-0 bg-opacity-30 bg-gray-900 w-full h-full z-[1]"
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="absolute top-0 bottom-0 right-0 bg-white bg-opacity-100 w-3/5 p-5"
+      >
+        <div className="flex justify-end">
           <svg
+            onClick={() => setOpenMobileMenu(false)}
             className="mb-10"
             width="26"
             height="26"

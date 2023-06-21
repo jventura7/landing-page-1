@@ -27,7 +27,7 @@ export default function Home() {
       {isDesktop ? (
         <DesktopNavBar />
       ) : (
-        <div className="flex w-screen items-center justify-between p-5 py-2">
+        <div className="flex w-screen items-center justify-between p-5 py-2 absolute top-0 z-[1]">
           <h1 className="font-bold text-4xl">snap</h1>
           <div onClick={() => setOpenMobileMenu(true)}>
             <svg width="32" height="18" xmlns="http://www.w3.org/2000/svg">
@@ -39,11 +39,17 @@ export default function Home() {
         </div>
       )}
       <div className="flex flex-col text-center items-center md:flex-row-reverse md:px-32 md:py-10 md:text-left relative md:pb-0">
-        {isDesktop ? (
-          <Image alt="desktop-hero" src={desktopHero} className="" />
-        ) : (
-          <Image alt="mobile-hero" src={mobileHero} />
-        )}
+        <div>
+          {isDesktop ? (
+            <Image alt="desktop-hero" src={desktopHero} className="min-w-min" />
+          ) : (
+            <Image
+              alt="mobile-hero"
+              src={mobileHero}
+              className="pt-10 md:pt-0"
+            />
+          )}
+        </div>
         <div className="p-5 space-y-4 pt-8 md:pr-16 md:space-y-12">
           <h1 className="font-bold text-3xl md:text-7xl">Make remote work</h1>
           <p className="text-slate-600 leading-7">

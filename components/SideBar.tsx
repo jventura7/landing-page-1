@@ -24,7 +24,7 @@ export default function SideBar({ setOpenMobileMenu }: SideBarProps) {
   return (
     <div
       onClick={() => setOpenMobileMenu(false)}
-      className="absolute top-0 left-0 bg-opacity-30 bg-gray-900 w-full h-full z-[1]"
+      className="absolute top-0 left-0 bg-opacity-30 bg-gray-900 w-full h-full z-[2]"
     >
       <div
         onClick={(e) => e.stopPropagation()}
